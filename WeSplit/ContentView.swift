@@ -17,18 +17,30 @@ struct ContentView: View {
     
     var body: some View {
         
-        Form {
+        NavigationView {
             
-            Section {
+            Form {
                 
-                TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.currencyCode ?? "USD"))
-                    .keyboardType(.decimalPad)
-            }
-            
-            Section {
+                Section {
+                    
+                    TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.currencyCode ?? "USD"))
+                        .keyboardType(.decimalPad)
+                    
+                    Picker("Number of People", selection: $numberOfPeople) {
+                        
+                        ForEach(2 ..< 100) {
+                            
+                            Text("\($0) people")
+                        }
+                    }
+                }
                 
-                Text(checkAmount, format: .currency(code: Locale.current.currencyCode ?? "USD"))
+                Section {
+                    
+                    Text(checkAmount, format: .currency(code: Locale.current.currencyCode ?? "USD"))
+                }
             }
+            .navigationTitle("WeSplit")
         }
     }
 }
